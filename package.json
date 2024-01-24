@@ -1,0 +1,30 @@
+{
+  "name": "newcord",
+  "version": "1.0.0",
+  "description": "Discord, nah. NEWCORD!!",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "discord",
+    "messaging",
+    "messages",
+    "message",
+    "dis",
+    "cord",
+    "corddis",
+    "thiscord",
+    "discable",
+    "thiscable"
+  ],
+  "author": "nolanwhy",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^4.24.3",
+    "fastify-socket.io": "^5.0.0",
+    "mime": "^4.0.1",
+    "socket.io": "^4.7.4"
+  },
+  "type": "module"
+}

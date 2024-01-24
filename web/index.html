@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTest</title>
+    <style>
+    body{
+        display: flex;
+        justify-content: center;
+    }
+    .background{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -9999999;
+    }
+    .socialBtn{}
+    </style>
+</head>
+<body>
+    <video class="background" src="https://cdn.discordapp.com/attachments/1199714198393991319/1199714484055457852/THE_FIRE_IN_THE_HOLES_REVOLVING.mp4?ex=65c38c2e&is=65b1172e&hm=e877d3da0d3420716178638e96410997cfb04cca6f659b287708db257808b7dc&" autoplay muted loop></video>
+    <button style="position: fixed;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;" onclick='this.remove();menuLoop();'>click to play</button>
+    <img id="logo" src="./images/logo.png">
+    <div style="position: fixed;bottom: 0;left: 0;">
+        <h1 style="color: white;">GTest BETA</h1>
+        <button class="socialBtn discord" onclick="window.open('https://discord.gg/Jx4FwE2C3g', '_blank')"></button>
+    </div>
+
+    <script>
+        let audio = new Audio("./sounds/menuLoop.mp3");
+        audio.loop = true;
+        audio.preservesPitch = false;
+        audio.playbackRate = 0.7;
+        function menuLoop() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const analyser = audioContext.createAnalyser();
+            const source = audioContext.createMediaElementSource(audio);
+            source.connect(analyser);
+            analyser.connect(audioContext.destination);
+            analyser.fftSize = 256;
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+
+            audio.pause();
+            let playSound = new Audio("./sounds/menu.mp3");
+            playSound.play();
+            setTimeout(() => {
+                audio.currentTime = 0;
+                audio.play();
+            }, 100);
+
+            setInterval(() => {
+                analyser.getByteFrequencyData(dataArray);
+                
+                const average = dataArray.reduce((acc, val) => acc + val, 0) / bufferLength;
+                scale = 1.0 + average / 500;
+                document.querySelector("#logo").style.transform = "scale(" + scale + ")";
+            }, 1);
+        }
+    </script>
+</body>
+</html>
