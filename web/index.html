@@ -75,6 +75,9 @@
     .socialBtn-untitled{
         background-image: url("./images/buttons/untitled.png");
     }
+    .socialBtn-github{
+        background-image: url("./images/buttons/github.png");
+    }
     @keyframes bounceButton{
         0%{
             transform: scale(1);
@@ -114,7 +117,11 @@
     </div>
     <div style="position: fixed;bottom: 20px;left: 20px;">
         <div style="display: flex;">
-            <button class="socialBtn socialBtn-facebook" onclick="alert('We don\'t have Facebook.');"></button>
+            <!--
+                removed cuz useless
+                <button class="socialBtn socialBtn-facebook" onclick="alert('We don\'t have Facebook.');"></button>
+            -->
+            <button class="socialBtn socialBtn-github" onclick="window.open('https://github.com/nolanwhy/gtest', '_blank');"></button>
             <button style="margin-left: 6px;" class="socialBtn socialBtn-twitter" onclick="window.open('https://twitter.com/_nolanwhy', '_blank');"></button>
             <button style="margin-left: 6px;" class="socialBtn socialBtn-youtube" onclick="window.open('https://youtube.com/@nolanwhy', '_blank');"></button>
             <button style="margin-left: 6px;" class="socialBtn socialBtn-twitch" onclick="window.open('https://twitch.tv/nolanwhyherefornoobs', '_blank');"></button>
