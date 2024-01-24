@@ -20,20 +20,9 @@
         display: flex;
         justify-content: center;
         margin: 0;
+        height: 100vh;
         overflow: hidden;
-        background-image: url("./images/menubg.png");
-        background-size: cover;
-        background-position: 0 0;
-        background-size: 150%;
-        animation: slideBackground 10s linear infinite;
-    }
-    @keyframes slideBackground {
-        0%{
-            background-position: -100% 0;
-        }
-        100%{
-            background-position: 0 0;
-        }
+        background-image: linear-gradient(#0065FD, #002E73);
     }
     .background{
         position: fixed;
@@ -43,7 +32,13 @@
         height: 100%;
         z-index: -9999999;
         filter: blur(15px);
-        transform: scale(1.1);
+        transform: scale(1.5);
+    }
+    .socialBtn:active{
+        animation: bounceButton 0.25s ease-in-out forwards;
+    }
+    .socialBtn:not(:active){
+        animation: unbounceButton 0.25s ease-in-out forwards;
     }
     .socialBtn{
         width: 55px;
@@ -80,12 +75,40 @@
     .socialBtn-untitled{
         background-image: url("./images/buttons/untitled.png");
     }
+    @keyframes bounceButton{
+        0%{
+            transform: scale(1);
+        }
+        50%{
+            transform: scale(1.2);
+        }
+        75%{
+            transform: scale(1.17);
+        }
+        100%{
+            transform: scale(1.2);
+        }
+    }
+    @keyframes unbounceButton{
+        0%{
+            transform: scale(1.2);
+        }
+        50%{
+            transform: scale(1);
+        }
+        75%{
+            transform: scale(1.07);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
     </style>
 </head>
 <body>
-    <!-- <video class="background" src="https://cdn.discordapp.com/attachments/1199714198393991319/1199714484055457852/THE_FIRE_IN_THE_HOLES_REVOLVING.mp4?ex=65c38c2e&is=65b1172e&hm=e877d3da0d3420716178638e96410997cfb04cca6f659b287708db257808b7dc&" autoplay muted loop></video> -->
+    <video class="background" src="./videos/menubg.mp4" autoplay muted loop></video>
     <button style="position: fixed;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;z-index: 99999999999;" onclick='this.remove();menuLoop();'>click to play</button>
-    <div id="logo">
+    <div id="logo" style="height: 179px;">
         <img src="./images/logo.png">
         <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">alpha phase</h1>
     </div>
