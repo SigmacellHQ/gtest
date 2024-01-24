@@ -1,23 +1,12 @@
 {
-  "name": "newcord",
+  "name": "GTest",
   "version": "1.0.0",
-  "description": "Discord, nah. NEWCORD!!",
+  "description": "gtest",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "keywords": [
-    "discord",
-    "messaging",
-    "messages",
-    "message",
-    "dis",
-    "cord",
-    "corddis",
-    "thiscord",
-    "discable",
-    "thiscable"
-  ],
+  "keywords": [],
   "author": "nolanwhy",
   "license": "MIT",
   "dependencies": {
