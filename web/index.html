@@ -18,31 +18,39 @@
         z-index: -9999999;
     }
     .socialBtn{
-        width: 50px;
-        height: 50px;
+        width: 55px;
+        height: 55px;
         background: transparent;
         border: none;
         cursor: pointer;
         background-size: cover;
         background-position: center;
     }
-    .socialBtn-discord{
-        background-image: url("./images/buttons/discord.png");
+    .socialBtn-nolanwhy{
+        width: 238px;
+        height: 50px;
+        background-image: url("./images/nolanwhy.png");
     }
     .socialBtn-facebook{
         background-image: url("./images/buttons/facebook.png");
-    }
-    .socialBtn-reddit{
-        background-image: url("./images/buttons/reddit.png");
-    }
-    .socialBtn-twitch{
-        background-image: url("./images/buttons/twitch.png");
     }
     .socialBtn-twitter{
         background-image: url("./images/buttons/twitter.png");
     }
     .socialBtn-youtube{
         background-image: url("./images/buttons/youtube.png");
+    }
+    .socialBtn-twitch{
+        background-image: url("./images/buttons/twitch.png");
+    }
+    .socialBtn-discord{
+        background-image: url("./images/buttons/discord.png");
+    }
+    .socialBtn-reddit{
+        background-image: url("./images/buttons/reddit.png");
+    }
+    .socialBtn-untitled{
+        background-image: url("./images/buttons/untitled.png");
     }
     </style>
 </head>
@@ -52,11 +60,17 @@
     <img id="logo" src="./images/logo.png">
     <div style="position: fixed;bottom: 20px;left: 20px;">
         <h1 style="color: white;">GTest BETA</h1>
-        <button class="socialBtn socialBtn-facebook" onclick="alert('We don\'t have Facebook.')"></button>
-        <button style="margin-left: 5px;" class="socialBtn socialBtn-twitter" onclick="window.open('https://twitter.com/_nolanwhy', '_blank');"></button>
-        <button style="margin-left: 5px;" class="socialBtn socialBtn-youtube" onclick="window.open('https://youtube.com/@nolanwhy', '_blank');"></button>
-        <button style="margin-left: 5px;" class="socialBtn socialBtn-twitch" onclick="window.open('https://twitch.tv/nolanwhyherefornoobs', '_blank');"></button>
-        <button style="margin-left: 5px;" class="socialBtn socialBtn-discord" onclick="window.open('https://discord.gg/Jx4FwE2C3g', '_blank');"></button>
+        <div style="display: flex;">
+            <button class="socialBtn socialBtn-facebook" onclick="alert('We don\'t have Facebook.');"></button>
+            <button style="margin-left: 6px;" class="socialBtn socialBtn-twitter" onclick="window.open('https://twitter.com/_nolanwhy', '_blank');"></button>
+            <button style="margin-left: 6px;" class="socialBtn socialBtn-youtube" onclick="window.open('https://youtube.com/@nolanwhy', '_blank');"></button>
+            <button style="margin-left: 6px;" class="socialBtn socialBtn-twitch" onclick="window.open('https://twitch.tv/nolanwhyherefornoobs', '_blank');"></button>
+            <button style="margin-left: 6px;" class="socialBtn socialBtn-discord" onclick="window.open('https://discord.gg/Jx4FwE2C3g', '_blank');"></button>
+        </div>
+        <div style="display: flex;">
+            <button style="display: block;" class="socialBtn socialBtn-nolanwhy" onclick="window.open('https://boomlings.xyz', '_blank');"></button>
+            <button style="margin-left: 5px;" class="socialBtn socialBtn-untitled" onclick="window.open('https://untitled.boomlings.xyz/user/2', '_blank');"></button>
+        </div>
     </div>
 
     <script>
