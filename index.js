@@ -22,8 +22,7 @@ server.get('/*', async (request, reply) => {
   try{
     // Attempt to read the file from ./web/path.
     const fileContent = await fs.promises.readFile(`./web/${path}`);
-    let contentType = mime.getType(path) || 'application/octet-stream'; 
-    console.log(path, contentType);
+    let contentType = mime.getType(path) || 'application/octet-stream';
   
     reply
       .code(200)
