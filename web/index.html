@@ -28,6 +28,7 @@
     body{
         display: flex;
         justify-content: center;
+        align-items: center;
         margin: 0;
         height: 100vh;
         overflow: hidden;
@@ -148,10 +149,14 @@
 <body>
     <video class="background" src="./videos/menubg.mp4" autoplay muted loop></video>
     <button style="position: fixed;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;z-index: 99999999999;" onclick='this.remove();menuLoop();'>click to play</button>
-    <div id="logo" style="height: 179px;">
+    <!-- Top -->
+    <div id="logo" style="position: fixed;top: 0;height: 179px;">
         <img src="./images/logo.png">
         <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">alpha phase</h1>
     </div>
+    <!-- Center -->
+    <h1 style="color: white;">Sorry, this is in alpha phase. Check back later :)</h1>
+    <!-- Bottom -->
     <div style="position: fixed;bottom: 20px;left: 20px;">
         <div style="display: flex;">
             <!--
