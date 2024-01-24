@@ -43,10 +43,10 @@
         filter: blur(15px);
         transform: scale(1.5);
     }
-    .socialBtn:active{
+    button:active{
         animation: bounceButton 0.25s ease-in-out forwards;
     }
-    .socialBtn:not(:active){
+    button:not(:active){
         animation: unbounceButton 0.25s ease-in-out forwards;
     }
     .socialBtn{
@@ -86,6 +86,34 @@
     }
     .socialBtn-github{
         background-image: url("./images/buttons/github.png");
+    }
+    .menuBottomBtn{
+        width: 114px;
+        height: 118px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        background-size: cover;
+        background-position: center;
+    }
+    .menuBottomBtn-achievements{
+        background-image: url("./images/buttons/achievements.png");
+    }
+    .menuBottomBtn-settings{
+        background-image: url("./images/buttons/settings.png");
+    }
+    .menuBottomBtn-stats{
+        background-image: url("./images/buttons/stats.png");
+    }
+    .moreGamesBtn{
+        width: 172px;
+        height: 140px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        background-size: cover;
+        background-position: center;
+        background-image: url("./images/buttons/moregames.png");
     }
     @keyframes bounceButton{
         0%{
@@ -141,7 +169,12 @@
             <button style="margin-left: 5px;" class="socialBtn socialBtn-untitled" onclick="window.open('https://untitled.boomlings.xyz/user/2', '_blank');"></button>
         </div>
     </div>
-
+    <div style="position: fixed;bottom: 25px;display: flex;">
+        <button class="menuBottomBtn menuBottomBtn-achievements" onclick="alert('Not done yet.');"></button>
+        <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-settings" onclick="alert('Not done yet.');"></button>
+        <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-stats" onclick="alert('Not done yet.');"></button>
+    </div>
+    <button style="position: fixed;bottom: 20px;right: 20px;" class="moreGamesBtn" onclick="alert('Not done yet.');"></button>
     <script>
         let audio = new Audio("./sounds/menuLoop.mp3");
         audio.loop = true;
