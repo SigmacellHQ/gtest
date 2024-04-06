@@ -176,7 +176,7 @@
     <!-- Top -->
     <div id="logo" style="position: fixed;top: 0;height: 179px;">
         <img>
-        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.1.0 (alpha)</h1>
+        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.1.7 (alpha)</h1>
     </div>
     <!-- Center -->
     <h1 style="color: white;">More will come in v0.2.0 and later!</h1>
@@ -252,19 +252,21 @@
 
         async function preloadAsset(url, callback) {
             if(preloadedAssets[url]) return callback(url);
-            console.log("Preloading " + url + " into temporary cache.");
+            console.log("Preloading asset \"" + url + "\"...");
             const res = await fetch(url);
             let blobURL = URL.createObjectURL(await res.blob());
             preloadedAssets[url] = blobURL;
+            console.log("Finished preloading asset \"" + url + "\".");
             return callback(blobURL);
         }
 
         async function preloadAssetSync(url) {
             if(preloadedAssets[url]) return preloadedAssets[url];
-            console.log("Preloading " + url + " into temporary cache.");
+            console.log("Preloading asset \"" + url + "\"...");
             const res = await fetch(url);
             let blobURL = URL.createObjectURL(await res.blob());
             preloadedAssets[url] = blobURL;
+            console.log("Finished preloading asset \"" + url + "\".");
             return blobURL;
         }
 
