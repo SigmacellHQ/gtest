@@ -223,7 +223,7 @@
             document.querySelector("#loadingGame").remove();
         }
 
-        function menuLoop() {
+        async function menuLoop() {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const analyser = audioContext.createAnalyser();
             const source = audioContext.createMediaElementSource(audio);
@@ -234,7 +234,7 @@
             const dataArray = new Uint8Array(bufferLength);
 
             audio.pause();
-            let playSound = new Audio("./sounds/menu.mp3");
+            let playSound = new Audio(await preloadAssetSync("./sounds/menu.mp3"));
             playSound.play();
             setTimeout(() => {
                 audio.currentTime = 0;
@@ -281,6 +281,7 @@
     document.querySelector(".background").src = await preloadAssetSync("./videos/menubg.mp4");
     document.querySelector("#logo img").src = await preloadAssetSync("./images/logo.png");
     document.querySelector(".nolanwhyIntro").src = await preloadAssetSync("./videos/nolanwhyIntro.mp4");
+    await preloadAssetSync("./sounds/menu.mp3");
     await preloadAssetSync("./sounds/DJRubRub.mp3");
     loadGame();
     </script>
