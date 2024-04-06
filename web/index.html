@@ -252,6 +252,7 @@
 
         async function preloadAsset(url, callback) {
             if(preloadedAssets[url]) return callback(url);
+            console.log("Preloading " + url + " into temporary cache.");
             const res = await fetch(url);
             let blobURL = URL.createObjectURL(await res.blob());
             preloadedAssets[url] = blobURL;
@@ -260,6 +261,7 @@
 
         async function preloadAssetSync(url) {
             if(preloadedAssets[url]) return preloadedAssets[url];
+            console.log("Preloading " + url + " into temporary cache.");
             const res = await fetch(url);
             let blobURL = URL.createObjectURL(await res.blob());
             preloadedAssets[url] = blobURL;
