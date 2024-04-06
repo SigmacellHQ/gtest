@@ -213,8 +213,8 @@
     <script>
         let preloadedAssets = {};
 
-        let audio = new Audio("./sounds/DJRubRub.mp3");
-        // let audio = new Audio("./sounds/menuLoop.mp3");
+        let audio = new Audio(await preloadAsset("./sounds/DJRubRub.mp3"));
+        // let audio = new Audio(await preloadAsset("./sounds/menuLoop.mp3"));
         audio.loop = true;
         audio.preservesPitch = false;
         audio.playbackRate = 1.1; // 0.7, for the menuLoop.mp3 sound, real!
