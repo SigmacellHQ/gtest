@@ -150,18 +150,36 @@
             transform: scale(1);
         }
     }
+    @keyframes introFadeAway{
+        0%{
+            width: 100%;
+            height: 100%;
+        }
+        100%{
+            width: 0%;
+            height: 0%;
+        }
+    }
+    .introFadeAway{
+        animation: introFadeAway 0.2s;
+    }
     </style>
 </head>
 <body>
-    <video class="background" src="./videos/menubg.mp4" autoplay muted loop></video>
-    <button style="position: fixed;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;z-index: 99999999999;opacity: 0.5;border: none;" onclick='this.remove();menuLoop();'>click to play</button>
+    <center id="loadingGame" style="position: fixed;background-color: black;color: white;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;z-index: 999999999999;align-items: center;">
+        <img src="./images/logo.png"><br>Loading game
+    </center>
+    <video class="background" autoplay muted loop></video>
+    <button style="position: fixed;background-color: black;color: white;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;z-index: 999999999;opacity: 1;border: none;" onclick='this.remove();setTimeout(() => beginLoad(), 200);'>Launch GTest</button>
+    <video class="nolanwhyIntro" style="position: fixed;z-index: 99999999;width: 100%;height: 100%;"></video>
+    <div class="nolanwhyIntroBg" style="position: fixed;width: 100%;height: 100%;background-color: black;z-index: 99999998;"></div>
     <!-- Top -->
     <div id="logo" style="position: fixed;top: 0;height: 179px;">
-        <img src="./images/logo.png">
-        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">alpha phase</h1>
+        <img>
+        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.1.0 (alpha)</h1>
     </div>
     <!-- Center -->
-    <h1 style="color: white;">Sorry, this is in alpha phase. Check back later :)<br>NOTE AFTER MONTHS: I will start working on this again. Join the Discord!</h1>
+    <h1 style="color: white;">More will come in v0.2.0 and later!</h1>
     <!-- Bottom -->
     <div style="position: fixed;bottom: 20px;left: 20px;">
         <div style="display: flex;">
@@ -186,12 +204,38 @@
         <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-stats" onclick="alert('Not done yet.');"></button>
     </div>
     <button style="position: fixed;bottom: 20px;right: 20px;" class="moreGamesBtn" onclick="alert('Not done yet.');"></button>
+    <script type="module">
+    document.querySelector(".background").src = await preloadAsset("./videos/menubg.mp4");
+    document.querySelector("#logo img").src = await preloadAsset("./images/logo.png");
+    document.querySelector(".nolanwhyIntro").src = await preloadAsset("./videos/nolanwhyIntro.mp4");
+    loadGame();
+    </script>
     <script>
-        //let audio = new Audio("./sounds/DJRubRub.mp3");
-		let audio = new Audio("./sounds/menuLoop.mp3");
+        let preloadedAssets = {};
+
+        let audio = new Audio("./sounds/DJRubRub.mp3");
+        // let audio = new Audio("./sounds/menuLoop.mp3");
         audio.loop = true;
         audio.preservesPitch = false;
-        audio.playbackRate = 0.7;
+        audio.playbackRate = 1.1; // 0.7, for the menuLoop.mp3 sound, real!
+        // TODO: update the file itself, bugs on mobile (both iOS and Android, probably shit browsers)
+
+        async function beginLoad() {
+            document.querySelector(".nolanwhyIntro").play();
+            document.querySelector(".nolanwhyIntro").addEventListener("ended", () => {
+                document.querySelector(".nolanwhyIntro").remove();
+                document.querySelector(".nolanwhyIntroBg").classList.add("introFadeAway");
+                document.querySelector(".nolanwhyIntroBg").addEventListener("animationend", () => {
+                    document.querySelector(".nolanwhyIntroBg").remove();
+                    menuLoop();
+                });
+            });
+        }
+
+        function loadGame() {
+            document.querySelector("#loadingGame").remove();
+        }
+
         function menuLoop() {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const analyser = audioContext.createAnalyser();
@@ -219,15 +263,13 @@
             }, 1);
         }
 
-        /*window.addEventListener("resize", () => {
-            if(window.innerHeight > window.innerWidth - 75) { 
-                document.body.style.display = "none";
-                document.querySelector(".toosmall").style.display = null;
-            } else { 
-                document.body.style.display = null;
-                document.querySelector(".toosmall").style.display = "none";
-            }
-        });*/
+        async function preloadAsset(url) {
+            if(preloadedAssets[url]) return preloadedAssets[url];
+            const res = await fetch(url);
+            let blobURL = URL.createObjectURL(await res.blob());
+            preloadedAssets[url] = blobURL;
+            return blobURL;
+        }
     </script>
 </body>
 </html>
