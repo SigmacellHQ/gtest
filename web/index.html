@@ -250,7 +250,15 @@
             }, 1);
         }
 
-        async function preloadAsset(url) {
+        async function preloadAsset(url, callback) {
+            if(preloadedAssets[url]) return callback(url);
+            const res = await fetch(url);
+            let blobURL = URL.createObjectURL(await res.blob());
+            preloadedAssets[url] = blobURL;
+            return callback(blobURL);
+        }
+
+        async function preloadAssetSync(url) {
             if(preloadedAssets[url]) return preloadedAssets[url];
             const res = await fetch(url);
             let blobURL = URL.createObjectURL(await res.blob());
@@ -258,18 +266,22 @@
             return blobURL;
         }
 
-        let audio = new Audio(await preloadAsset("./sounds/DJRubRub.mp3"));
-        // let audio = new Audio(await preloadAsset("./sounds/menuLoop.mp3"));
-        audio.loop = true;
-        audio.preservesPitch = false;
-        audio.playbackRate = 1.1; // 0.7, for the menuLoop.mp3 sound, real!
-        // TODO: update the file itself, bugs on mobile (both iOS and Android, probably shit browsers)
+        let audio;
+
+        // "./sounds/menuLoop.mp3"
+        preloadAsset("./sounds/DJRubRub.mp3", (blobURL) => {
+            audio = new Audio(blobURL);
+            audio.loop = true;
+            audio.preservesPitch = false;
+            audio.playbackRate = 1.1; // 0.7, for the menuLoop.mp3 sound, real!
+            // TODO: update the file itself, bugs on mobile (both iOS and Android, probably shit browsers)
+        });
     </script>
     <script type="module">
-    document.querySelector(".background").src = await preloadAsset("./videos/menubg.mp4");
-    document.querySelector("#logo img").src = await preloadAsset("./images/logo.png");
-    document.querySelector(".nolanwhyIntro").src = await preloadAsset("./videos/nolanwhyIntro.mp4");
-    await preloadAsset("./sounds/DJRubRub.mp3");
+    document.querySelector(".background").src = await preloadAssetSync("./videos/menubg.mp4");
+    document.querySelector("#logo img").src = await preloadAssetSync("./images/logo.png");
+    document.querySelector(".nolanwhyIntro").src = await preloadAssetSync("./videos/nolanwhyIntro.mp4");
+    await preloadAssetSync("./sounds/DJRubRub.mp3");
     loadGame();
     </script>
 </body>
