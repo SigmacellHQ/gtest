@@ -14,7 +14,7 @@ let player = {
     dead: false,
     image: new Image()
 };
-player.image.src = 'https://media.discordapp.net/attachments/1124689325330792550/1178372779020664952/image.png?ex=6575e82b&is=6563732b&hm=41b889f40a98c245eb8b988fb49a1ffacfd9fe9c628baf5669fa4762e017e9a7&=&format=webp';
+player.image.src = 'https://media.discordapp.net/attachments/1218640497543872694/1226230043156549732/niceyomi.png?ex=662402b8&is=66118db8&hm=664be376823bcf6dba4c36ae883911b864dbde22fd0b357a97bcd35bb7d97202&=&format=webp&quality=lossless';
 
 let level = {
     speed: 2,
@@ -83,7 +83,7 @@ function update() {
 
 function setupGame() {
     if (!game.playing) {
-        setupAudio("https://cdn.discordapp.com/attachments/1124689325330792550/1178095363903717437/Family_Guy-Iraq_Lobster.mp3?ex=6574e5ce&is=656270ce&hm=b775e6ee7c538c977e78a38e6dddfd507fa7e333a16e70886edc8168c0475ccf&");
+        setupAudio("https://cdn.discordapp.com/attachments/1218640497543872694/1226230497563246723/Family_Guy_-_Iraq_Lobster.mp3?ex=66240324&is=66118e24&hm=152139c03fb5c389048f5e23859541400d28b9267f78a1b173ef95d778cdaa06&");
         game.playing = true;
         update();
     }
