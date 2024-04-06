@@ -20,10 +20,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <link rel="apple-touch-icon" href="/images/logo_small.png" />
     <style>
-    @font-face {
-        font-family: Pusab;
-        src: url('./fonts/Pusab.ttf');
-    }
     *{
         font-family: "Pusab", Arial;
         font-weight: normal;
@@ -65,35 +61,6 @@
         background-size: cover;
         background-position: center;
     }
-    .socialBtn-nolanwhy{
-        width: 238px;
-        height: 50px;
-        background-image: url("./images/nolanwhy.png");
-    }
-    .socialBtn-facebook{
-        background-image: url("./images/buttons/facebook.png");
-    }
-    .socialBtn-twitter{
-        background-image: url("./images/buttons/twitter.png");
-    }
-    .socialBtn-youtube{
-        background-image: url("./images/buttons/youtube.png");
-    }
-    .socialBtn-twitch{
-        background-image: url("./images/buttons/twitch.png");
-    }
-    .socialBtn-discord{
-        background-image: url("./images/buttons/discord.png");
-    }
-    .socialBtn-reddit{
-        background-image: url("./images/buttons/reddit.png");
-    }
-    .socialBtn-untitled{
-        background-image: url("./images/buttons/untitled.png");
-    }
-    .socialBtn-github{
-        background-image: url("./images/buttons/github.png");
-    }
     .menuBottomBtn{
         width: 114px;
         height: 118px;
@@ -102,25 +69,6 @@
         cursor: pointer;
         background-size: cover;
         background-position: center;
-    }
-    .menuBottomBtn-achievements{
-        background-image: url("./images/buttons/achievements.png");
-    }
-    .menuBottomBtn-settings{
-        background-image: url("./images/buttons/settings.png");
-    }
-    .menuBottomBtn-stats{
-        background-image: url("./images/buttons/stats.png");
-    }
-    .moreGamesBtn{
-        width: 172px;
-        height: 140px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        background-size: cover;
-        background-position: center;
-        background-image: url("./images/buttons/moregames.png");
     }
     @keyframes bounceButton{
         0%{
@@ -176,7 +124,7 @@
     <!-- Top -->
     <div id="logo" style="position: fixed;top: 0;height: 179px;">
         <img>
-        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.1.7 (alpha)</h1>
+        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.1.8 (alpha)</h1>
     </div>
     <!-- Center -->
     <h1 style="color: white;">More will come in v0.2.0 and later!</h1>
@@ -280,8 +228,66 @@
             audio.playbackRate = 1.1; // 0.7, for the menuLoop.mp3 sound, real!
             // TODO: update the file itself, bugs on mobile (both iOS and Android, probably shit browsers)
         });
+
+        async function loadCSS() {
+            const style = document.createElement("style");
+            style.innerHTML = `@font-face {
+    font-family: Pusab;
+    src: url('${await preloadAssetSync("./fonts/Pusab.ttf")}');
+}
+.socialBtn-nolanwhy{
+    width: 238px;
+    height: 50px;
+    background-image: url("${await preloadAssetSync("./images/nolanwhy.png")}");
+}
+.socialBtn-facebook{
+    background-image: url("${await preloadAssetSync("./images/buttons/facebook.png")}");
+}
+.socialBtn-twitter{
+    background-image: url("${await preloadAssetSync("./images/buttons/twitter.png")}");
+}
+.socialBtn-youtube{
+    background-image: url("${await preloadAssetSync("./images/buttons/youtube.png")}");
+}
+.socialBtn-twitch{
+    background-image: url("${await preloadAssetSync("./images/buttons/twitch.png")}");
+}
+.socialBtn-discord{
+    background-image: url("${await preloadAssetSync("./images/buttons/discord.png")}");
+}
+.socialBtn-reddit{
+    background-image: url("${await preloadAssetSync("./images/buttons/reddit.png")}");
+}
+.socialBtn-untitled{
+    background-image: url("${await preloadAssetSync("./images/buttons/untitled.png")}");
+}
+.socialBtn-github{
+    background-image: url("${await preloadAssetSync("./images/buttons/github.png")}");
+}
+.menuBottomBtn-achievements{
+    background-image: url("${await preloadAssetSync("./images/buttons/achievements.png")}");
+}
+.menuBottomBtn-settings{
+    background-image: url("${await preloadAssetSync("./images/buttons/settings.png")}");
+}
+.menuBottomBtn-stats{
+    background-image: url("${await preloadAssetSync("./images/buttons/stats.png")}");
+}
+.moreGamesBtn{
+    width: 172px;
+    height: 140px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-image: url("${await preloadAssetSync("./images/buttons/moregames.png")}");
+}`;
+            document.head.appendChild(style);
+        }
     </script>
     <script type="module">
+    await loadCSS();
     document.querySelector(".background").src = await preloadAssetSync("./videos/menubg.mp4");
     document.querySelector("#logo img").src = await preloadAssetSync("./images/logo.png");
     document.querySelector(".nolanwhyIntro").src = await preloadAssetSync("./videos/nolanwhyIntro.mp4");
