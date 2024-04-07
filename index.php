@@ -178,7 +178,7 @@ http_response_code(200);
         <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.2.0 (alpha)</h1>
     </div>
     <!-- Center -->
-    <h1 style="color: white;">More will come in v0.3.0 and later!</h1>
+    <h1 style="color: white;">More will come in later versions!</h1>
     <!-- Bottom -->
     <div style="position: fixed;bottom: 20px;left: 20px;">
         <div style="display: flex;">
@@ -207,6 +207,7 @@ http_response_code(200);
     <div class="page plugins">
         <button class="backBtn backBtn-pink" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
         <h1 style="position: absolute;top: 0;">Plugins</h1>
+        <p style="font-size: 40px;">Plugins are not done, but will come soon!</p>
     </div>
     <script>
         let preloadedAssets = {};
