@@ -239,6 +239,8 @@ http_response_code(200);
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
+        let cacheKiller = random_int(1, 2147483647);
+
         function modifyURL(url) {
             window.history.replaceState({}, url, url);
         }
@@ -311,7 +313,7 @@ http_response_code(200);
         }
 
         let assetsPreloaded = 0;
-        let allAssetsToPreload = 25;
+        let allAssetsToPreload = 27;
         async function preloadAssetSyncToGameLoad(url) {
             let asset = await preloadAssetSync(url);
             assetsPreloaded++;
@@ -323,7 +325,7 @@ http_response_code(200);
         let audio;
 
         // "./sounds/DJRubRub.mp3"
-        preloadAsset("./sounds/menuLoop.mp3", (blobURL) => {
+        preloadAsset("./sounds/menuLoop.mp3?" + cacheKiller, (blobURL) => {
             audio = new Audio(blobURL);
             audio.loop = true;
             audio.preservesPitch = false;
@@ -335,48 +337,48 @@ http_response_code(200);
             const style = document.createElement("style");
             style.innerHTML = `@font-face {
     font-family: Pusab;
-    src: url('${await preloadAssetSync("./fonts/Pusab.ttf")}');
+    src: url('${await preloadAssetSyncToGameLoad("./fonts/Pusab.ttf?" + cacheKiller)}');
 }
 .socialBtn-nolanwhy{
     width: 238px;
     height: 50px;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/nolanwhy.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/nolanwhy.png?" + cacheKiller)}");
 }
 .socialBtn-facebook{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/facebook.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/facebook.png?" + cacheKiller)}");
 }
 .socialBtn-twitter{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitter.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitter.png?" + cacheKiller)}");
 }
 .socialBtn-youtube{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/youtube.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/youtube.png?" + cacheKiller)}");
 }
 .socialBtn-twitch{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitch.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitch.png?" + cacheKiller)}");
 }
 .socialBtn-discord{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/discord.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/discord.png?" + cacheKiller)}");
 }
 .socialBtn-reddit{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/reddit.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/reddit.png?" + cacheKiller)}");
 }
 .socialBtn-untitled{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/untitled.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/untitled.png?" + cacheKiller)}");
 }
 .socialBtn-github{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/github.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/github.png?" + cacheKiller)}");
 }
 .menuBottomBtn-achievements{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/achievements.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/achievements.png?" + cacheKiller)}");
 }
 .menuBottomBtn-settings{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/settings.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/settings.png?" + cacheKiller)}");
 }
 .menuBottomBtn-stats{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/stats.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/stats.png?" + cacheKiller)}");
 }
 .menuBottomBtn-plugins{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/plugins.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/plugins.png?" + cacheKiller)}");
 }
 .moreGamesBtn{
     width: 172px;
@@ -386,16 +388,16 @@ http_response_code(200);
     cursor: pointer;
     background-size: cover;
     background-position: center;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/moregames.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/moregames.png?" + cacheKiller)}");
 }
 .backBtn-blue{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/blue_back.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/blue_back.png?" + cacheKiller)}");
 }
 .backBtn-green{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/green_back.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/green_back.png?" + cacheKiller)}");
 }
 .backBtn-pink{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/pink_back.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/pink_back.png?" + cacheKiller)}");
 }
 .mainBtn{
     width: 170px;
@@ -407,15 +409,15 @@ http_response_code(200);
     background-position: center;
 }
 .characterEditorBtn{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/characterEditor.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/characterEditor.png?" + cacheKiller)}");
 }
 .mainLevelsBtn{
     width: 230px;
     height: 230px;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/mainLevels.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/mainLevels.png?" + cacheKiller)}");
 }
 .onlineLevelsBtn{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/onlineLevels.png?" + random_int(1, 2147483647))}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/onlineLevels.png?" + cacheKiller)}");
 }`;
             document.head.appendChild(style);
         }
@@ -456,11 +458,12 @@ http_response_code(200);
     </script>
     <script type="module">
     await loadCSS();
-    document.querySelector(".background").src = await preloadAssetSyncToGameLoad("./videos/menubg.mp4");
-    document.querySelector("#logo img").src = await preloadAssetSyncToGameLoad("./images/logo.png");
-    document.querySelector(".nolanwhyIntro").src = await preloadAssetSyncToGameLoad("./videos/nolanwhyIntro.mp4");
-    await preloadAssetSyncToGameLoad("./sounds/menu.mp3");
-    await preloadAssetSyncToGameLoad("./sounds/DJRubRub.mp3");
+    document.querySelector(".background").src = await preloadAssetSyncToGameLoad("./videos/menubg.mp4?" + cacheKiller);
+    document.querySelector("#logo img").src = await preloadAssetSyncToGameLoad("./images/logo.png?" + cacheKiller);
+    document.querySelector(".nolanwhyIntro").src = await preloadAssetSyncToGameLoad("./videos/nolanwhyIntro.mp4?" + cacheKiller);
+    await preloadAssetSyncToGameLoad("./sounds/menu.mp3?" + cacheKiller);
+    await preloadAssetSyncToGameLoad("./sounds/menuLoop.mp3?" + cacheKiller);
+    await preloadAssetSyncToGameLoad("./sounds/DJRubRub.mp3?" + cacheKiller);
     loadGame();
     </script>
 </body>
