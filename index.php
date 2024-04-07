@@ -233,6 +233,12 @@ http_response_code(200);
     <script>
         let preloadedAssets = {};
 
+        function random_int(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
         function modifyURL(url) {
             window.history.replaceState({}, url, url);
         }
@@ -334,43 +340,43 @@ http_response_code(200);
 .socialBtn-nolanwhy{
     width: 238px;
     height: 50px;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/nolanwhy.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/nolanwhy.png?" + random_int(1, 2147483647))}");
 }
 .socialBtn-facebook{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/facebook.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/facebook.png?" + random_int(1, 2147483647))}");
 }
 .socialBtn-twitter{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitter.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitter.png?" + random_int(1, 2147483647))}");
 }
 .socialBtn-youtube{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/youtube.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/youtube.png?" + random_int(1, 2147483647))}");
 }
 .socialBtn-twitch{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitch.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitch.png?" + random_int(1, 2147483647))}");
 }
 .socialBtn-discord{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/discord.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/discord.png?" + random_int(1, 2147483647))}");
 }
 .socialBtn-reddit{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/reddit.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/reddit.png?" + random_int(1, 2147483647))}");
 }
 .socialBtn-untitled{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/untitled.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/untitled.png?" + random_int(1, 2147483647))}");
 }
 .socialBtn-github{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/github.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/github.png?" + random_int(1, 2147483647))}");
 }
 .menuBottomBtn-achievements{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/achievements.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/achievements.png?" + random_int(1, 2147483647))}");
 }
 .menuBottomBtn-settings{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/settings.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/settings.png?" + random_int(1, 2147483647))}");
 }
 .menuBottomBtn-stats{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/stats.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/stats.png?" + random_int(1, 2147483647))}");
 }
 .menuBottomBtn-plugins{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/plugins.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/plugins.png?" + random_int(1, 2147483647))}");
 }
 .moreGamesBtn{
     width: 172px;
@@ -380,16 +386,16 @@ http_response_code(200);
     cursor: pointer;
     background-size: cover;
     background-position: center;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/moregames.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/moregames.png?" + random_int(1, 2147483647))}");
 }
 .backBtn-blue{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/blue_back.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/blue_back.png?" + random_int(1, 2147483647))}");
 }
 .backBtn-green{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/green_back.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/green_back.png?" + random_int(1, 2147483647))}");
 }
 .backBtn-pink{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/pink_back.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/pink_back.png?" + random_int(1, 2147483647))}");
 }
 .mainBtn{
     width: 170px;
@@ -401,15 +407,15 @@ http_response_code(200);
     background-position: center;
 }
 .characterEditorBtn{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/characterEditor.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/characterEditor.png?" + random_int(1, 2147483647))}");
 }
 .mainLevelsBtn{
     width: 230px;
     height: 230px;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/mainLevels.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/mainLevels.png?" + random_int(1, 2147483647))}");
 }
 .onlineLevelsBtn{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/onlineLevels.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/onlineLevels.png?" + random_int(1, 2147483647))}");
 }`;
             document.head.appendChild(style);
         }
