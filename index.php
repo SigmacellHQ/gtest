@@ -1,3 +1,6 @@
+<?php
+http_response_code(200);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +29,7 @@
         -webkit-text-stroke-color: black;
         -webkit-text-stroke-width: 2.1px;
         text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
+        color: white;
     }
     body{
         display: flex;
@@ -98,24 +102,71 @@
             transform: scale(1);
         }
     }
-    @keyframes introFadeAway{
+    @keyframes introFadeOut{
         0%{
             width: 100%;
             height: 100%;
+            opacity: 1;
         }
         100%{
             width: 0%;
             height: 0%;
+            opacity: 0;
         }
     }
-    .introFadeAway{
-        animation: introFadeAway 0.2s;
+    .introFadeOut{
+        animation: introFadeOut 0.2s forwards;
+    }
+    @keyframes introFadeIn{
+        0%{
+            width: 0%;
+            height: 0%;
+            opacity: 0;
+        }
+        100%{
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+        }
+    }
+    .introFadeIn{
+        animation: introFadeIn 0.2s forwards;
+    }
+    @keyframes spin{
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+    .spinAnimation{
+        animation: spin 0.7s infinite linear;
+    }
+    .page{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#0065fd, #002e73);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .backBtn{
+        width: 77px;
+        height: 77px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        background-size: cover;
+        background-position: center;
     }
     </style>
 </head>
 <body>
-    <center id="loadingGame" style="position: fixed;background-color: black;color: white;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;z-index: 999999999999;align-items: center;">
-        <img src="./images/logo.png"><br>Loading game
+    <center id="loadingGame" style="position: fixed;background-color: black;color: white;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;z-index: 1000000000;align-items: center;">
+        <img src="./images/logo.png"><br><img src="./images/loading.png" class="spinAnimation" style="width: 120px;height: 120px;"><br>
+        <p style="margin: 0;">Waiting for preloads</p>
     </center>
     <video class="background" autoplay muted loop></video>
     <button style="position: fixed;background-color: black;color: white;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;z-index: 999999999;opacity: 1;border: none;" onclick='this.remove();setTimeout(() => beginLoad(), 200);'>Launch GTest</button>
@@ -124,10 +175,10 @@
     <!-- Top -->
     <div id="logo" style="position: fixed;top: 0;height: 179px;">
         <img>
-        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.1.8 (alpha)</h1>
+        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.2.0 (alpha)</h1>
     </div>
     <!-- Center -->
-    <h1 style="color: white;">More will come in v0.2.0 and later!</h1>
+    <h1 style="color: white;">More will come in v0.3.0 and later!</h1>
     <!-- Bottom -->
     <div style="position: fixed;bottom: 20px;left: 20px;">
         <div style="display: flex;">
@@ -150,16 +201,29 @@
         <button class="menuBottomBtn menuBottomBtn-achievements" onclick="alert('Not done yet.');"></button>
         <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-settings" onclick="alert('Not done yet.');"></button>
         <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-stats" onclick="alert('Not done yet.');"></button>
+        <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-plugins" onclick="openPage('plugins');"></button>
     </div>
     <button style="position: fixed;bottom: 20px;right: 20px;" class="moreGamesBtn" onclick="alert('Not done yet.');"></button>
+    <div class="page plugins">
+        <button class="backBtn backBtn-pink" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
+        <h1 style="position: absolute;top: 0;">Plugins</h1>
+    </div>
     <script>
         let preloadedAssets = {};
+
+        function modifyURL(url) {
+            window.history.replaceState({}, url, url);
+        }
+
+        function getURL() {
+            return window.location.pathname;
+        }
 
         async function beginLoad() {
             document.querySelector(".nolanwhyIntro").play();
             document.querySelector(".nolanwhyIntro").addEventListener("ended", () => {
                 document.querySelector(".nolanwhyIntro").remove();
-                document.querySelector(".nolanwhyIntroBg").classList.add("introFadeAway");
+                document.querySelector(".nolanwhyIntroBg").classList.add("introFadeOut");
                 document.querySelector(".nolanwhyIntroBg").addEventListener("animationend", () => {
                     document.querySelector(".nolanwhyIntroBg").remove();
                     menuLoop();
@@ -218,6 +282,16 @@
             return blobURL;
         }
 
+        let assetsPreloaded = 0;
+        let allAssetsToPreload = 22;
+        async function preloadAssetSyncToGameLoad(url) {
+            let asset = await preloadAssetSync(url);
+            assetsPreloaded++;
+            if(assetsPreloaded < allAssetsToPreload) document.querySelector("#loadingGame p").innerText = assetsPreloaded + "/" + allAssetsToPreload + " preloaded assets";
+            else document.querySelector("#loadingGame p").innerText = "Finished preloading " + assetsPreloaded + " assets";
+            return asset;
+        }
+
         let audio;
 
         // "./sounds/menuLoop.mp3"
@@ -238,40 +312,43 @@
 .socialBtn-nolanwhy{
     width: 238px;
     height: 50px;
-    background-image: url("${await preloadAssetSync("./images/nolanwhy.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/nolanwhy.png")}");
 }
 .socialBtn-facebook{
-    background-image: url("${await preloadAssetSync("./images/buttons/facebook.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/facebook.png")}");
 }
 .socialBtn-twitter{
-    background-image: url("${await preloadAssetSync("./images/buttons/twitter.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitter.png")}");
 }
 .socialBtn-youtube{
-    background-image: url("${await preloadAssetSync("./images/buttons/youtube.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/youtube.png")}");
 }
 .socialBtn-twitch{
-    background-image: url("${await preloadAssetSync("./images/buttons/twitch.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitch.png")}");
 }
 .socialBtn-discord{
-    background-image: url("${await preloadAssetSync("./images/buttons/discord.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/discord.png")}");
 }
 .socialBtn-reddit{
-    background-image: url("${await preloadAssetSync("./images/buttons/reddit.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/reddit.png")}");
 }
 .socialBtn-untitled{
-    background-image: url("${await preloadAssetSync("./images/buttons/untitled.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/untitled.png")}");
 }
 .socialBtn-github{
-    background-image: url("${await preloadAssetSync("./images/buttons/github.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/github.png")}");
 }
 .menuBottomBtn-achievements{
-    background-image: url("${await preloadAssetSync("./images/buttons/achievements.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/achievements.png")}");
 }
 .menuBottomBtn-settings{
-    background-image: url("${await preloadAssetSync("./images/buttons/settings.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/settings.png")}");
 }
 .menuBottomBtn-stats{
-    background-image: url("${await preloadAssetSync("./images/buttons/stats.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/stats.png")}");
+}
+.menuBottomBtn-plugins{
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/plugins.png")}");
 }
 .moreGamesBtn{
     width: 172px;
@@ -281,18 +358,49 @@
     cursor: pointer;
     background-size: cover;
     background-position: center;
-    background-image: url("${await preloadAssetSync("./images/buttons/moregames.png")}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/moregames.png")}");
+}
+.backBtn-blue{
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/blue_back.png")}");
+}
+.backBtn-green{
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/green_back.png")}");
+}
+.backBtn-pink{
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/pink_back.png")}");
 }`;
             document.head.appendChild(style);
         }
+
+        function openPage(page, closeAllOtherPages = true) {
+            if(page === "plugins") {
+                if(closeAllOtherPages) goToMenu();
+                modifyURL("/plugins");
+                document.querySelector(".page.plugins").classList.add("introFadeIn");
+                document.querySelector(".page.plugins").classList.remove("introFadeOut");
+            } else {
+                console.error("Page not found.");
+            }
+        }
+
+        function goToMenu() {
+            modifyURL("/");
+            document.querySelectorAll(".page").forEach((page) => {page.classList.remove("introFadeIn");page.classList.add("introFadeOut");});
+        }
+
+        document.querySelectorAll(".page").forEach((page) => {page.classList.remove("introFadeIn");page.classList.add("introFadeOut");});
+
+        if(getURL() === "/") console.log("No page requested.");
+        else if(getURL() === "/plugins") openPage("plugins");
+        else console.error("Page not found.");
     </script>
     <script type="module">
     await loadCSS();
-    document.querySelector(".background").src = await preloadAssetSync("./videos/menubg.mp4");
-    document.querySelector("#logo img").src = await preloadAssetSync("./images/logo.png");
-    document.querySelector(".nolanwhyIntro").src = await preloadAssetSync("./videos/nolanwhyIntro.mp4");
-    await preloadAssetSync("./sounds/menu.mp3");
-    await preloadAssetSync("./sounds/DJRubRub.mp3");
+    document.querySelector(".background").src = await preloadAssetSyncToGameLoad("./videos/menubg.mp4");
+    document.querySelector("#logo img").src = await preloadAssetSyncToGameLoad("./images/logo.png");
+    document.querySelector(".nolanwhyIntro").src = await preloadAssetSyncToGameLoad("./videos/nolanwhyIntro.mp4");
+    await preloadAssetSyncToGameLoad("./sounds/menu.mp3");
+    await preloadAssetSyncToGameLoad("./sounds/DJRubRub.mp3");
     loadGame();
     </script>
 </body>
