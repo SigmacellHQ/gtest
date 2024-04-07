@@ -175,7 +175,7 @@ http_response_code(200);
     <!-- Top -->
     <div id="logo" style="position: fixed;top: 0;height: 179px;">
         <img alt="GTest">
-        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.2.0 (alpha)</h1>
+        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.2.1 (alpha)</h1>
     </div>
     <!-- Center -->
     <h1 style="color: white;">More will come in later versions!</h1>
