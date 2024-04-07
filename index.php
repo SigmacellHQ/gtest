@@ -392,8 +392,8 @@ http_response_code(200);
     background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/pink_back.png")}");
 }
 .mainBtn{
-    width: 140px;
-    height: 140px;
+    width: 170px;
+    height: 170px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -404,8 +404,8 @@ http_response_code(200);
     background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/characterEditor.png")}");
 }
 .mainLevelsBtn{
-    width: 200px;
-    height: 200px;
+    width: 230px;
+    height: 230px;
     background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/mainLevels.png")}");
 }
 .onlineLevelsBtn{
