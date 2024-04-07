@@ -295,12 +295,12 @@ http_response_code(200);
 
         let audio;
 
-        // "./sounds/menuLoop.mp3"
-        preloadAsset("./sounds/DJRubRub.mp3", (blobURL) => {
+        // "./sounds/DJRubRub.mp3"
+        preloadAsset("./sounds/menuLoop.mp3", (blobURL) => {
             audio = new Audio(blobURL);
             audio.loop = true;
             audio.preservesPitch = false;
-            audio.playbackRate = 1.1; // 0.7, for the menuLoop.mp3 sound, real!
+            audio.playbackRate = 0.7; // 1.1, for the DJRubRub.mp3 sound, real!
             // TODO: update the file itself, bugs on mobile (both iOS and Android, probably shit browsers)
         });
 
