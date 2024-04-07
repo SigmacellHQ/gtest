@@ -107,8 +107,12 @@ http_response_code(200);
             width: 100%;
             height: 100%;
             opacity: 1;
+            user-select: auto;
+            pointer-events: auto;
         }
         100%{
+            user-select: none;
+            pointer-events: none;
             width: 0%;
             height: 0%;
             opacity: 0;
@@ -124,6 +128,10 @@ http_response_code(200);
             opacity: 0;
         }
         100%{
+            user-select: none;
+            pointer-events: none;
+            user-select: auto;
+            pointer-events: auto;
             width: 100%;
             height: 100%;
             opacity: 1;
@@ -175,10 +183,13 @@ http_response_code(200);
     <!-- Top -->
     <div id="logo" style="position: fixed;top: 0;height: 179px;">
         <img alt="GTest">
-        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.2.1 (alpha)</h1>
+        <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">pre-v0.3.0 (alpha)</h1>
     </div>
     <!-- Center -->
-    <h1 style="color: white;">More will come in later versions!</h1>
+    <!-- <h1 style="color: white;">More will come in later versions!</h1> -->
+    <button class="mainBtn characterEditorBtn" onclick="openPage('characterEditor');"></button>
+    <button style="margin-left: 50px;" class="mainBtn mainLevelsBtn" onclick="openPage('mainLevels');"></button>
+    <button style="margin-left: 50px;" class="mainBtn onlineLevelsBtn" onclick="openPage('onlineLevels');"></button>
     <!-- Bottom -->
     <div style="position: fixed;bottom: 20px;left: 20px;">
         <div style="display: flex;">
@@ -198,16 +209,26 @@ http_response_code(200);
         </div>
     </div>
     <div style="position: fixed;bottom: 25px;display: flex;">
-        <button class="menuBottomBtn menuBottomBtn-achievements" onclick="alert('Not done yet.');"></button>
-        <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-settings" onclick="alert('Not done yet.');"></button>
-        <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-stats" onclick="alert('Not done yet.');"></button>
+        <button class="menuBottomBtn menuBottomBtn-achievements" onclick="openPage('achievements');"></button>
+        <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-settings" onclick="openPage('settings');"></button>
+        <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-stats" onclick="openPage('gameStats');"></button>
         <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-plugins" onclick="openPage('plugins');"></button>
     </div>
-    <button style="position: fixed;bottom: 20px;right: 20px;" class="moreGamesBtn" onclick="alert('Not done yet.');"></button>
+    <button style="position: fixed;bottom: 20px;right: 20px;" class="moreGamesBtn" onclick="openPage('moreGames');"></button>
+    <div class="page mainLevels">
+        <button class="backBtn backBtn-green" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
+        <h1 style="position: absolute;top: 0;">Main Levels</h1>
+        <p style="font-size: 40px;">This page is not done, but it will come soon!</p>
+    </div>
     <div class="page plugins">
         <button class="backBtn backBtn-pink" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
         <h1 style="position: absolute;top: 0;">Plugins</h1>
-        <p style="font-size: 40px;">Plugins are not done, but will come soon!</p>
+        <p style="font-size: 40px;">This page is not done, but it will come soon!</p>
+    </div>
+    <div class="page http404" style="background: linear-gradient(#fd1500, #730a00);">
+        <button class="backBtn backBtn-green" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
+        <h1 style="position: absolute;top: 0;">404 Not Found</h1>
+        <p style="font-size: 40px;">The page you were trying to access was not found.</p>
     </div>
     <script>
         let preloadedAssets = {};
@@ -284,7 +305,7 @@ http_response_code(200);
         }
 
         let assetsPreloaded = 0;
-        let allAssetsToPreload = 22;
+        let allAssetsToPreload = 25;
         async function preloadAssetSyncToGameLoad(url) {
             let asset = await preloadAssetSync(url);
             assetsPreloaded++;
@@ -369,6 +390,26 @@ http_response_code(200);
 }
 .backBtn-pink{
     background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/pink_back.png")}");
+}
+.mainBtn{
+    width: 140px;
+    height: 140px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+}
+.characterEditorBtn{
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/characterEditor.png")}");
+}
+.mainLevelsBtn{
+    width: 200px;
+    height: 200px;
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/mainLevels.png")}");
+}
+.onlineLevelsBtn{
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/onlineLevels.png")}");
 }`;
             document.head.appendChild(style);
         }
@@ -379,8 +420,19 @@ http_response_code(200);
                 modifyURL("/plugins");
                 document.querySelector(".page.plugins").classList.add("introFadeIn");
                 document.querySelector(".page.plugins").classList.remove("introFadeOut");
+            } else if(page === "mainLevels") {
+                if(closeAllOtherPages) goToMenu();
+                modifyURL("/mainLevels");
+                document.querySelector(".page.mainLevels").classList.add("introFadeIn");
+                document.querySelector(".page.mainLevels").classList.remove("introFadeOut");
+            } else if(page === "http404") {
+                let oldURL = getURL();
+                if(closeAllOtherPages) goToMenu();
+                modifyURL(oldURL);
+                document.querySelector(".page.http404").classList.add("introFadeIn");
+                document.querySelector(".page.http404").classList.remove("introFadeOut");
             } else {
-                console.error("Page not found.");
+                openPage("http404", closeAllOtherPages);
             }
         }
 
@@ -392,8 +444,9 @@ http_response_code(200);
         document.querySelectorAll(".page").forEach((page) => {page.classList.remove("introFadeIn");page.classList.add("introFadeOut");});
 
         if(getURL() === "/") console.log("No page requested.");
+        else if(getURL() === "/mainLevels") openPage("mainLevels");
         else if(getURL() === "/plugins") openPage("plugins");
-        else console.error("Page not found.");
+        else openPage("http404");
     </script>
     <script type="module">
     await loadCSS();
