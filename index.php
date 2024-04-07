@@ -205,7 +205,8 @@ http_response_code(200);
         </div>
         <div style="display: flex;">
             <button style="display: block;" class="socialBtn socialBtn-nolanwhy" onclick="window.open('https://boomlings.xyz', '_blank');"></button>
-            <button style="margin-left: 5px;" class="socialBtn socialBtn-untitled" onclick="window.open('https://untitled.boomlings.xyz/user/2', '_blank');"></button>
+            <!-- <button style="margin-left: 5px;" class="socialBtn socialBtn-untitled" onclick="window.open('https://untitled.boomlings.xyz/user/2', '_blank');"></button> -->
+            <button style="margin-left: 5px;" class="socialBtn socialBtn-roblox" onclick="openPage('robloxSocialLinks');"></button>
         </div>
     </div>
     <div style="position: fixed;bottom: 25px;display: flex;">
@@ -224,6 +225,35 @@ http_response_code(200);
         <button class="backBtn backBtn-pink" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
         <h1 style="position: absolute;top: 0;">Plugins</h1>
         <p style="font-size: 40px;">This page is not done, but it will come soon!</p>
+    </div>
+    <div class="page moreGames" style="background: #00000090;">
+        <button class="backBtn backBtn-pink" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
+        <div style="width: 714px;height: 600px;">
+            <div class="table-top">
+                <h1 style="margin-top: 3px;font-size: 45px;">nolanwhy Games</h1>
+            </div>
+            <div class="table-side" style="height: 50px;transform: rotate(-90deg);margin-left: -217px;"></div>
+            <div class="table-side" style="height: 50px;transform: rotate(90deg);margin-left: 433px;"></div>
+            <div class="table-bottom"></div>
+            <div class="table-content">
+                <p style="font-size: 40px;">No games yet.</p>
+            </div>
+        </div>
+    </div>
+    <div class="page robloxSocialLinks" style="background: #00000090;">
+        <button class="backBtn backBtn-blue" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
+        <div style="width: 714px;height: 600px;">
+            <div class="table-top">
+                <h1 style="margin-top: 3px;font-size: 45px;">Roblox Social Links</h1>
+            </div>
+            <div class="table-side" style="height: 50px;transform: rotate(-90deg);margin-left: -217px;"></div>
+            <div class="table-side" style="height: 50px;transform: rotate(90deg);margin-left: 433px;"></div>
+            <div class="table-bottom"></div>
+            <div class="table-content">
+                <button style="font-size: 40px;" class="btn btn-green" onclick="goToMenu();window.open('https://www.roblox.com/users/1200963339/profile', '_blank');">roblox.com</button>
+                <button style="margin-left: 10px;font-size: 40px;" class="btn btn-green" onclick="goToMenu();window.open('https://preflux.me/users/7/profile', '_blank');">preflux.me</button>
+            </div>
+        </div>
     </div>
     <div class="page http404" style="background: linear-gradient(#fd1500, #730a00);">
         <button class="backBtn backBtn-green" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
@@ -313,7 +343,7 @@ http_response_code(200);
         }
 
         let assetsPreloaded = 0;
-        let allAssetsToPreload = 27;
+        let allAssetsToPreload = 32;
         async function preloadAssetSyncToGameLoad(url) {
             let asset = await preloadAssetSync(url);
             assetsPreloaded++;
@@ -325,11 +355,11 @@ http_response_code(200);
         let audio;
 
         // "./sounds/DJRubRub.mp3"
-        preloadAsset("./sounds/menuLoop.mp3?" + cacheKiller, (blobURL) => {
+        preloadAsset("./sounds/menuLoopMegalovania.mp3?" + cacheKiller, (blobURL) => {
             audio = new Audio(blobURL);
             audio.loop = true;
             audio.preservesPitch = false;
-            audio.playbackRate = 0.7; // 1.1, for the DJRubRub.mp3 sound, real!
+            // audio.playbackRate = 0.7; // 1.1, for the DJRubRub.mp3 sound, real!
             // TODO: update the file itself, bugs on mobile (both iOS and Android, probably shit browsers)
         });
 
@@ -364,6 +394,9 @@ http_response_code(200);
 }
 .socialBtn-untitled{
     background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/untitled.png?" + cacheKiller)}");
+}
+.socialBtn-roblox{
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/roblox.png?" + cacheKiller)}");
 }
 .socialBtn-github{
     background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/github.png?" + cacheKiller)}");
@@ -418,6 +451,55 @@ http_response_code(200);
 }
 .onlineLevelsBtn{
     background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/onlineLevels.png?" + cacheKiller)}");
+}
+.table-top{
+    background: transparent;
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/table_top.png?" + cacheKiller)}");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    width: 714px;
+    height: 79px;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+}
+.table-side{
+    background: transparent;
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/table_side.png?" + cacheKiller)}");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    width: 500px;
+    height: 50px;
+    margin-top: 255px;
+    z-index: 2;
+}
+.table-bottom{
+    background: transparent;
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/table_bottom.png?" + cacheKiller)}");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    width: 710px;
+    height: 76px;
+    margin-top: 500px;
+    z-index: 3;
+    margin-left: 3px;
+}
+.table-content{
+    position: absolute;
+    width: 628px;
+    height: 455px;
+    z-index: 1;
+    background-color: #00000090;
+    margin-left: 44px;
+    margin-top: 61px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }`;
             document.head.appendChild(style);
         }
@@ -433,6 +515,17 @@ http_response_code(200);
                 modifyURL("/mainLevels");
                 document.querySelector(".page.mainLevels").classList.add("introFadeIn");
                 document.querySelector(".page.mainLevels").classList.remove("introFadeOut");
+            } else if(page === "moreGames") {
+                if(closeAllOtherPages) goToMenu();
+                modifyURL("/moreGames");
+                document.querySelector(".page.moreGames").classList.add("introFadeIn");
+                document.querySelector(".page.moreGames").classList.remove("introFadeOut");
+            } else if(page === "robloxSocialLinks") {
+                let oldURL = getURL();
+                if(closeAllOtherPages) goToMenu();
+                modifyURL(oldURL);
+                document.querySelector(".page.robloxSocialLinks").classList.add("introFadeIn");
+                document.querySelector(".page.robloxSocialLinks").classList.remove("introFadeOut");
             } else if(page === "http404") {
                 let oldURL = getURL();
                 if(closeAllOtherPages) goToMenu();
@@ -454,6 +547,7 @@ http_response_code(200);
         if(getURL() === "/") console.log("No page requested.");
         else if(getURL() === "/mainLevels") openPage("mainLevels");
         else if(getURL() === "/plugins") openPage("plugins");
+        else if(getURL() === "/moreGames") openPage("moreGames");
         else openPage("http404");
     </script>
     <script type="module">
@@ -463,6 +557,7 @@ http_response_code(200);
     document.querySelector(".nolanwhyIntro").src = await preloadAssetSyncToGameLoad("./videos/nolanwhyIntro.mp4?" + cacheKiller);
     await preloadAssetSyncToGameLoad("./sounds/menu.mp3?" + cacheKiller);
     await preloadAssetSyncToGameLoad("./sounds/menuLoop.mp3?" + cacheKiller);
+    await preloadAssetSyncToGameLoad("./sounds/menuLoopMegalovania.mp3?" + cacheKiller);
     await preloadAssetSyncToGameLoad("./sounds/DJRubRub.mp3?" + cacheKiller);
     loadGame();
     </script>
