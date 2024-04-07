@@ -165,7 +165,7 @@ http_response_code(200);
 </head>
 <body>
     <center id="loadingGame" style="position: fixed;background-color: black;color: white;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;z-index: 1000000000;align-items: center;">
-        <img src="./images/logo.png"><br><img src="./images/loading.png" class="spinAnimation" style="width: 120px;height: 120px;"><br>
+        <img src="./images/logo.png" alt="GTest"><br><img src="./images/loading.png" class="spinAnimation" style="width: 120px;height: 120px;" alt="Loading"><br>
         <p style="margin: 0;">Waiting for preloads</p>
     </center>
     <video class="background" autoplay muted loop></video>
@@ -174,7 +174,7 @@ http_response_code(200);
     <div class="nolanwhyIntroBg" style="position: fixed;width: 100%;height: 100%;background-color: black;z-index: 99999998;"></div>
     <!-- Top -->
     <div id="logo" style="position: fixed;top: 0;height: 179px;">
-        <img>
+        <img alt="GTest">
         <h1 style="color: white;margin-top: -40px;margin-left: 141px;user-select: none;">v0.2.0 (alpha)</h1>
     </div>
     <!-- Center -->
