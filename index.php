@@ -214,6 +214,7 @@ http_response_code(200);
         <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-settings" onclick="openPage('settings');"></button>
         <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-stats" onclick="openPage('gameStats');"></button>
         <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-plugins" onclick="openPage('plugins');"></button>
+        <button style="margin-left: 13px;" class="menuBottomBtn menuBottomBtn-discotroll" onclick="discoTroll();"></button>
     </div>
     <button style="position: fixed;bottom: 20px;right: 20px;" class="moreGamesBtn" onclick="openPage('moreGames');"></button>
     <div class="page mainLevels">
@@ -254,6 +255,11 @@ http_response_code(200);
                 <button style="margin-left: 10px;font-size: 40px;" class="btn btn-green" onclick="goToMenu();window.open('https://preflux.me/users/7/profile', '_blank');">preflux.me</button>
             </div>
         </div>
+    </div>
+    <div class="page discoTroll" style="background: #00000090;">
+        <button class="backBtn backBtn-pink" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
+        <h1 style="position: absolute;top: 0;">You have been disco trolled!</h1>
+        <p style="font-size: 40px;">Your GTest will now become unusable until a game restart!!! How fun!</p>
     </div>
     <div class="page http404" style="background: linear-gradient(#fd1500, #730a00);">
         <button class="backBtn backBtn-green" style="position: absolute;top: 15px;left: 15px;" onclick="goToMenu();"></button>
@@ -343,7 +349,7 @@ http_response_code(200);
         }
 
         let assetsPreloaded = 0;
-        let allAssetsToPreload = 32;
+        let allAssetsToPreload = 34;
         async function preloadAssetSyncToGameLoad(url) {
             let asset = await preloadAssetSync(url);
             assetsPreloaded++;
@@ -355,6 +361,8 @@ http_response_code(200);
         let audio;
 
         // "./sounds/DJRubRub.mp3"
+        // "./sounds/menuLoopMegalovania.mp3"
+        // "./sounds/darudesandstorm.mp3"
         preloadAsset("./sounds/menuLoopMegalovania.mp3?" + cacheKiller, (blobURL) => {
             audio = new Audio(blobURL);
             audio.loop = true;
@@ -412,6 +420,9 @@ http_response_code(200);
 }
 .menuBottomBtn-plugins{
     background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/plugins.png?" + cacheKiller)}");
+}
+.menuBottomBtn-discotroll{
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/discotroll.png?" + cacheKiller)}");
 }
 .moreGamesBtn{
     width: 172px;
@@ -526,6 +537,12 @@ http_response_code(200);
                 modifyURL(oldURL);
                 document.querySelector(".page.robloxSocialLinks").classList.add("introFadeIn");
                 document.querySelector(".page.robloxSocialLinks").classList.remove("introFadeOut");
+            } else if(page === "discoTroll") {
+                let oldURL = getURL();
+                if(closeAllOtherPages) goToMenu();
+                modifyURL(oldURL);
+                document.querySelector(".page.discoTroll").classList.add("introFadeIn");
+                document.querySelector(".page.discoTroll").classList.remove("introFadeOut");
             } else if(page === "http404") {
                 let oldURL = getURL();
                 if(closeAllOtherPages) goToMenu();
@@ -549,16 +566,44 @@ http_response_code(200);
         else if(getURL() === "/plugins") openPage("plugins");
         else if(getURL() === "/moreGames") openPage("moreGames");
         else openPage("http404");
+
+        let discoTrolled = false;
+
+        async function discoTroll() {
+            if(!discoTrolled) {
+                discoTrolled = true;
+
+                openPage("discoTroll");
+                setTimeout(async () => {
+                    setInterval(() => {
+                        modifyURL("/Trolled! " + Math.random());
+                        document.querySelector("title").innerText = "Trolled! " + Math.random() + " - GTest";
+                    }, 100);
+        
+                    audio.pause();
+                    audio = new Audio(await preloadAssetSync("./sounds/darudesandstorm.mp3?" + cacheKiller));
+                    audio.loop = true;
+                    audio.play();
+        
+                    const style = document.createElement("style");
+                    style.innerHTML = `*{
+            animation: bounceButton 0.1s infinite ease-in-out forwards;
+        }`;
+                    document.body.appendChild(style);
+                }, 5000);
+            }
+        }
     </script>
     <script type="module">
     await loadCSS();
     document.querySelector(".background").src = await preloadAssetSyncToGameLoad("./videos/menubg.mp4?" + cacheKiller);
     document.querySelector("#logo img").src = await preloadAssetSyncToGameLoad("./images/logo.png?" + cacheKiller);
-    document.querySelector(".nolanwhyIntro").src = await preloadAssetSyncToGameLoad("./videos/nolanwhyIntro.mp4?" + cacheKiller);
+    document.querySelector(".nolanwhyIntro").src = await preloadAssetSyncToGameLoad("./videos/nolanwhyIntroNew.mp4?" + cacheKiller);
     await preloadAssetSyncToGameLoad("./sounds/menu.mp3?" + cacheKiller);
     await preloadAssetSyncToGameLoad("./sounds/menuLoop.mp3?" + cacheKiller);
     await preloadAssetSyncToGameLoad("./sounds/menuLoopMegalovania.mp3?" + cacheKiller);
     await preloadAssetSyncToGameLoad("./sounds/DJRubRub.mp3?" + cacheKiller);
+    await preloadAssetSyncToGameLoad("./sounds/darudesandstorm.mp3?" + cacheKiller);
     loadGame();
     </script>
 </body>
