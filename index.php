@@ -204,9 +204,9 @@ http_response_code(200);
             <button style="margin-left: 6px;" class="socialBtn socialBtn-discord" onclick="window.open('https://discord.gg/7h2k2DGFcF', '_blank');"></button>
         </div>
         <div style="display: flex;">
-            <button style="display: block;" class="socialBtn socialBtn-nolanwhy" onclick="window.open('https://boomlings.xyz', '_blank');"></button>
+            <button style="display: block;" class="socialBtn socialBtn-sigmacell" onclick="window.open('https://sigmacell.boomlings.xyz', '_blank');"></button>
             <!-- <button style="margin-left: 5px;" class="socialBtn socialBtn-untitled" onclick="window.open('https://untitled.boomlings.xyz/user/2', '_blank');"></button> -->
-            <button style="margin-left: 5px;" class="socialBtn socialBtn-roblox" onclick="openPage('robloxSocialLinks');"></button>
+            <button style="margin-left: 5px;margin-top: 7px;" class="socialBtn socialBtn-roblox" onclick="openPage('robloxSocialLinks');"></button>
         </div>
     </div>
     <div style="position: fixed;bottom: 25px;display: flex;">
@@ -349,7 +349,7 @@ http_response_code(200);
         }
 
         let assetsPreloaded = 0;
-        let allAssetsToPreload = 34;
+        let allAssetsToPreload = 35;
         async function preloadAssetSyncToGameLoad(url) {
             let asset = await preloadAssetSync(url);
             assetsPreloaded++;
@@ -381,6 +381,11 @@ http_response_code(200);
     width: 238px;
     height: 50px;
     background-image: url("${await preloadAssetSyncToGameLoad("./images/nolanwhy.png?" + cacheKiller)}");
+}
+.socialBtn-sigmacell{
+    width: 238px;
+    height: 66px;
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/sigmacell/dark_text.png?" + cacheKiller)}");
 }
 .socialBtn-facebook{
     background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/facebook.png?" + cacheKiller)}");
