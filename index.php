@@ -197,7 +197,7 @@ http_response_code(200);
                 removed cuz useless
                 <button class="socialBtn socialBtn-facebook" onclick="alert('We don\'t have Facebook.');"></button>
             -->
-            <button class="socialBtn socialBtn-github" onclick="window.open('https://github.com/nolanwhy/gtest', '_blank');"></button>
+            <button class="socialBtn socialBtn-github" onclick="window.open('https://github.com/SigmacellHQ/gtest', '_blank');"></button>
             <button style="margin-left: 6px;" class="socialBtn socialBtn-twitter" onclick="window.open('https://twitter.com/_nolanwhy', '_blank');"></button>
             <button style="margin-left: 6px;" class="socialBtn socialBtn-youtube" onclick="window.open('https://youtube.com/@nolanwhy', '_blank');"></button>
             <button style="margin-left: 6px;" class="socialBtn socialBtn-twitch" onclick="window.open('https://twitch.tv/nolanwhyherefornoobs', '_blank');"></button>
