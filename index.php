@@ -13,7 +13,7 @@ http_response_code(200);
     <meta property="og:description" content="A Geometry Dash clone">
     <meta property="og:url" content="https://gt.boomlings.xyz">
     <meta property="og:image" content="https://gt.boomlings.xyz/images/logo_small.png">
-    <meta property="og:site_name" content="a nolanwhy production">
+    <meta property="og:site_name" content="Sigmacell Productions">
     <meta property="og:locale" content="en_US">
     <!-- <meta name="twitter:card" content="summary_large_image"> -->
     <meta name="application-name" content="GTest" />
