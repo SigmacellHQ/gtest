@@ -1,5 +1,6 @@
 <?php
-http_response_code(200);
+require_once($_SERVER["DOCUMENT_ROOT"]."/private/config.php");
+ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +12,8 @@ http_response_code(200);
     <meta property="og:title" content="GTest">
     <meta property="og:type" content="website">
     <meta property="og:description" content="A Geometry Dash clone">
-    <meta property="og:url" content="https://gt.boomlings.xyz">
-    <meta property="og:image" content="https://gt.boomlings.xyz/images/logo_small.png">
+    <meta property="og:url" content="https://gtest.sigmacell.nuka.works">
+    <meta property="og:image" content="https://gtest.sigmacell.nuka.works/images/logo_small.png">
     <meta property="og:site_name" content="Sigmacell Productions">
     <meta property="og:locale" content="en_US">
     <!-- <meta name="twitter:card" content="summary_large_image"> -->
@@ -22,154 +23,7 @@ http_response_code(200);
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <link rel="apple-touch-icon" href="/images/logo_small.png" />
-    <style>
-    *{
-        font-family: "Pusab", Arial;
-        font-weight: normal;
-        -webkit-text-stroke-color: black;
-        -webkit-text-stroke-width: 2.1px;
-        text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
-        color: white;
-    }
-    body{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        height: 100vh;
-        overflow: hidden;
-        background-image: linear-gradient(#0065FD, #002E73);
-    }
-    .background{
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -9999999;
-        filter: sepia(50%) hue-rotate(187deg) saturate(200%) blur(15px) blur(15px);
-        transform: scale(1.5);
-    }
-    button:active{
-        animation: bounceButton 0.25s ease-in-out forwards;
-    }
-    button:not(:active){
-        animation: unbounceButton 0.25s ease-in-out forwards;
-    }
-    .socialBtn{
-        width: 55px;
-        height: 55px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        background-size: cover;
-        background-position: center;
-    }
-    .menuBottomBtn{
-        width: 114px;
-        height: 118px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        background-size: cover;
-        background-position: center;
-    }
-    @keyframes bounceButton{
-        0%{
-            transform: scale(1);
-        }
-        50%{
-            transform: scale(1.2);
-        }
-        75%{
-            transform: scale(1.17);
-        }
-        100%{
-            transform: scale(1.2);
-        }
-    }
-    @keyframes unbounceButton{
-        0%{
-            transform: scale(1.2);
-        }
-        50%{
-            transform: scale(1);
-        }
-        75%{
-            transform: scale(1.07);
-        }
-        100%{
-            transform: scale(1);
-        }
-    }
-    @keyframes introFadeOut{
-        0%{
-            width: 100%;
-            height: 100%;
-            opacity: 1;
-            user-select: auto;
-            pointer-events: auto;
-        }
-        100%{
-            user-select: none;
-            pointer-events: none;
-            width: 0%;
-            height: 0%;
-            opacity: 0;
-        }
-    }
-    .introFadeOut{
-        animation: introFadeOut 0.2s forwards;
-    }
-    @keyframes introFadeIn{
-        0%{
-            width: 0%;
-            height: 0%;
-            opacity: 0;
-        }
-        100%{
-            user-select: none;
-            pointer-events: none;
-            user-select: auto;
-            pointer-events: auto;
-            width: 100%;
-            height: 100%;
-            opacity: 1;
-        }
-    }
-    .introFadeIn{
-        animation: introFadeIn 0.2s forwards;
-    }
-    @keyframes spin{
-        0%{
-            transform: rotate(0deg);
-        }
-        100%{
-            transform: rotate(360deg);
-        }
-    }
-    .spinAnimation{
-        animation: spin 0.7s infinite linear;
-    }
-    .page{
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(#0065fd, #002e73);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .backBtn{
-        width: 77px;
-        height: 77px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        background-size: cover;
-        background-position: center;
-    }
-    </style>
+    <style>*{font-family:"Pusab",Arial;font-weight:normal;-webkit-text-stroke-color:black;-webkit-text-stroke-width:2.1px;text-shadow:3px 3px 0 rgba(0,0,0,0.3);color:white}body{display:flex;justify-content:center;align-items:center;margin:0;height:100vh;overflow:hidden;background-image:linear-gradient(#0065fd,#002e73)}.background{position:fixed;left:0;top:0;width:100%;height:100%;z-index:-9999999;filter:sepia(50%) hue-rotate(187deg) saturate(200%) blur(15px) blur(15px);transform:scale(1.5)}button:active{animation:bounceButton .25s ease-in-out forwards}button:not(:active){animation:unbounceButton .25s ease-in-out forwards}.socialBtn{width:55px;height:55px;background:transparent;border:0;cursor:pointer;background-size:cover;background-position:center}.menuBottomBtn{width:114px;height:118px;background:transparent;border:0;cursor:pointer;background-size:cover;background-position:center}@keyframes bounceButton{0%{transform:scale(1)}50%{transform:scale(1.2)}75%{transform:scale(1.17)}100%{transform:scale(1.2)}}@keyframes unbounceButton{0%{transform:scale(1.2)}50%{transform:scale(1)}75%{transform:scale(1.07)}100%{transform:scale(1)}}@keyframes introFadeOut{0%{width:100%;height:100%;opacity:1;user-select:auto;pointer-events:auto}100%{user-select:none;pointer-events:none;width:0;height:0;opacity:0}}.introFadeOut{animation:introFadeOut .2s forwards}@keyframes introFadeIn{0%{width:0;height:0;opacity:0}100%{user-select:none;pointer-events:none;user-select:auto;pointer-events:auto;width:100%;height:100%;opacity:1}}.introFadeIn{animation:introFadeIn .2s forwards}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.spinAnimation{animation:spin .7s infinite linear}.page{position:fixed;width:100%;height:100%;background:linear-gradient(#0065fd,#002e73);display:flex;justify-content:center;align-items:center}.backBtn{width:77px;height:77px;background:transparent;border:0;cursor:pointer;background-size:cover;background-position:center}</style>
 </head>
 <body>
     <center id="loadingGame" style="position: fixed;background-color: black;color: white;width: 100%;height: 100%;left: 0;top: 0;font-size: 50px;z-index: 1000000000;align-items: center;">
@@ -198,7 +52,7 @@ http_response_code(200);
                 <button class="socialBtn socialBtn-facebook" onclick="alert('We don\'t have Facebook.');"></button>
             -->
             <button class="socialBtn socialBtn-github" onclick="window.open('https://github.com/SigmacellHQ/gtest', '_blank');"></button>
-            <button style="margin-left: 6px;" class="socialBtn socialBtn-twitter" onclick="window.open('https://twitter.com/_nolanwhy', '_blank');"></button>
+            <button style="margin-left: 6px;" class="socialBtn socialBtn-twitter" onclick="window.open('https://twitter.com/SigmacellHQ', '_blank');"></button>
             <button style="margin-left: 6px;" class="socialBtn socialBtn-youtube" onclick="window.open('https://youtube.com/@nolanwhy', '_blank');"></button>
             <button style="margin-left: 6px;" class="socialBtn socialBtn-twitch" onclick="window.open('https://twitch.tv/nolanwhyherefornoobs', '_blank');"></button>
             <button style="margin-left: 6px;" class="socialBtn socialBtn-discord" onclick="window.open('https://discord.gg/7h2k2DGFcF', '_blank');"></button>
@@ -266,168 +120,61 @@ http_response_code(200);
         <h1 style="position: absolute;top: 0;">404 Not Found</h1>
         <p style="font-size: 40px;">The page you were trying to access was not found.</p>
     </div>
-    <script>
-        let preloadedAssets = {};
-
-        function random_int(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        let cacheKiller = random_int(1, 2147483647);
-
-        function modifyURL(url) {
-            window.history.replaceState({}, url, url);
-        }
-
-        function getURL() {
-            return window.location.pathname;
-        }
-
-        async function beginLoad() {
-            document.querySelector(".nolanwhyIntro").play();
-            document.querySelector(".nolanwhyIntro").addEventListener("ended", () => {
-                document.querySelector(".nolanwhyIntro").remove();
-                document.querySelector(".nolanwhyIntroBg").classList.add("introFadeOut");
-                document.querySelector(".nolanwhyIntroBg").addEventListener("animationend", () => {
-                    document.querySelector(".nolanwhyIntroBg").remove();
-                    menuLoop();
-                });
-            });
-        }
-
-        function loadGame() {
-            document.querySelector("#loadingGame").remove();
-        }
-
-        async function menuLoop() {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const analyser = audioContext.createAnalyser();
-            const source = audioContext.createMediaElementSource(audio);
-            source.connect(analyser);
-            analyser.connect(audioContext.destination);
-            analyser.fftSize = 256;
-            const bufferLength = analyser.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
-
-            audio.pause();
-            let playSound = new Audio(await preloadAssetSync("./sounds/menu.mp3"));
-            playSound.play();
-            setTimeout(() => {
-                audio.currentTime = 0;
-                audio.play();
-            }, 100);
-
-            setInterval(() => {
-                analyser.getByteFrequencyData(dataArray);
-                
-                const average = dataArray.reduce((acc, val) => acc + val, 0) / bufferLength;
-                scale = 1.0 + average / 500;
-                document.querySelector("#logo").style.transform = "scale(" + scale + ")";
-            }, 1);
-        }
-
-        async function preloadAsset(url, callback) {
-            if(preloadedAssets[url]) return callback(url);
-            console.log("Preloading asset \"" + url + "\"...");
-            const res = await fetch(url);
-            let blobURL = URL.createObjectURL(await res.blob());
-            preloadedAssets[url] = blobURL;
-            console.log("Finished preloading asset \"" + url + "\".");
-            return callback(blobURL);
-        }
-
-        async function preloadAssetSync(url) {
-            if(preloadedAssets[url]) return preloadedAssets[url];
-            console.log("Preloading asset \"" + url + "\"...");
-            const res = await fetch(url);
-            let blobURL = URL.createObjectURL(await res.blob());
-            preloadedAssets[url] = blobURL;
-            console.log("Finished preloading asset \"" + url + "\".");
-            return blobURL;
-        }
-
-        let assetsPreloaded = 0;
-        let allAssetsToPreload = 35;
-        async function preloadAssetSyncToGameLoad(url) {
-            let asset = await preloadAssetSync(url);
-            assetsPreloaded++;
-            if(assetsPreloaded < allAssetsToPreload) document.querySelector("#loadingGame p").innerText = assetsPreloaded + "/" + allAssetsToPreload + " preloaded assets";
-            else document.querySelector("#loadingGame p").innerText = "Finished preloading " + assetsPreloaded + " assets";
-            return asset;
-        }
-
-        let audio;
-
-        // "./sounds/DJRubRub.mp3"
-        // "./sounds/menuLoopMegalovania.mp3"
-        // "./sounds/darudesandstorm.mp3"
-        preloadAsset("./sounds/menuLoopMegalovania.mp3?" + cacheKiller, (blobURL) => {
-            audio = new Audio(blobURL);
-            audio.loop = true;
-            audio.preservesPitch = false;
-            // audio.playbackRate = 0.7; // 1.1, for the DJRubRub.mp3 sound, real!
-            // TODO: update the file itself, bugs on mobile (both iOS and Android, probably shit browsers)
-        });
-
-        async function loadCSS() {
-            const style = document.createElement("style");
-            style.innerHTML = `@font-face {
+    <script>let preloadedAssets={};function random_int(e,a){e=Math.ceil(e);a=Math.floor(a);return Math.floor(Math.random()*(a-e+1))+e}let cacheKiller=random_int(1,2147483647);function modifyURL(e){window.history.replaceState({},e,e)}function getURL(){return window.location.pathname}async function beginLoad(){document.querySelector(".nolanwhyIntro").play();document.querySelector(".nolanwhyIntro").addEventListener("ended",()=>{document.querySelector(".nolanwhyIntro").remove();document.querySelector(".nolanwhyIntroBg").classList.add("introFadeOut");document.querySelector(".nolanwhyIntroBg").addEventListener("animationend",()=>{document.querySelector(".nolanwhyIntroBg").remove();menuLoop()})})}function loadGame(){document.querySelector("#loadingGame").remove()}async function menuLoop(){const e=new(window.AudioContext||window.webkitAudioContext);const a=e.createAnalyser();const o=e.createMediaElementSource(audio);o.connect(a);a.connect(e.destination);a.fftSize=256;const t=a.frequencyBinCount;const n=new Uint8Array(t);audio.pause();let i=new Audio(await preloadAssetSync("./sounds/menu.mp3"));i.play();setTimeout(()=>{audio.currentTime=0;audio.play()},100);setInterval(()=>{a.getByteFrequencyData(n);const e=n.reduce((e,a)=>e+a,0)/t;scale=1+e/500;document.querySelector("#logo").style.transform="scale("+scale+")"},1)}async function preloadAsset(e,a){if(preloadedAssets[e])return a(e);console.log('Preloading asset "'+e+'"...');const o=await fetch(e);let t=URL.createObjectURL(await o.blob());preloadedAssets[e]=t;console.log('Finished preloading asset "'+e+'".');return a(t)}async function preloadAssetSync(e){if(preloadedAssets[e])return preloadedAssets[e];console.log('Preloading asset "'+e+'"...');const a=await fetch(e);let o=URL.createObjectURL(await a.blob());preloadedAssets[e]=o;console.log('Finished preloading asset "'+e+'".');return o}let assetsPreloaded=0;let allAssetsToPreload=33;async function preloadAssetSyncToGameLoad(e){let a=await preloadAssetSync(e);assetsPreloaded++;if(assetsPreloaded<allAssetsToPreload)document.querySelector("#loadingGame p").innerText=assetsPreloaded+"/"+allAssetsToPreload+" preloaded assets";else document.querySelector("#loadingGame p").innerText="Finished preloading "+assetsPreloaded+" assets";return a}let audio;preloadAsset("./sounds/menuLoopMegalovania.mp3?"+cacheKiller,e=>{audio=new Audio(e);audio.loop=true;audio.o=false});async function loadCSS(){const e=document.createElement("style");e.innerHTML=`@font-face {
     font-family: Pusab;
-    src: url('${await preloadAssetSyncToGameLoad("./fonts/Pusab.ttf?" + cacheKiller)}');
+    src: url('${await preloadAssetSyncToGameLoad("./fonts/Pusab.ttf?"+cacheKiller)}');
 }
 .socialBtn-nolanwhy{
     width: 238px;
     height: 50px;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/nolanwhy.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/nolanwhy.png?"+cacheKiller)}");
 }
 .socialBtn-sigmacell{
     width: 238px;
     height: 66px;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/sigmacell/dark_text.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/sigmacell/dark_text.png?"+cacheKiller)}");
 }
 .socialBtn-facebook{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/facebook.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/facebook.png?"+cacheKiller)}");
 }
 .socialBtn-twitter{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitter.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitter.png?"+cacheKiller)}");
 }
 .socialBtn-youtube{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/youtube.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/youtube.png?"+cacheKiller)}");
 }
 .socialBtn-twitch{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitch.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/twitch.png?"+cacheKiller)}");
 }
 .socialBtn-discord{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/discord.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/discord.png?"+cacheKiller)}");
 }
 .socialBtn-reddit{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/reddit.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/reddit.png?"+cacheKiller)}");
 }
 .socialBtn-untitled{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/untitled.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/untitled.png?"+cacheKiller)}");
 }
 .socialBtn-roblox{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/roblox.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/roblox.png?"+cacheKiller)}");
 }
 .socialBtn-github{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/github.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/github.png?"+cacheKiller)}");
 }
 .menuBottomBtn-achievements{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/achievements.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/achievements.png?"+cacheKiller)}");
 }
 .menuBottomBtn-settings{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/settings.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/settings.png?"+cacheKiller)}");
 }
 .menuBottomBtn-stats{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/stats.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/stats.png?"+cacheKiller)}");
 }
 .menuBottomBtn-plugins{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/plugins.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/plugins.png?"+cacheKiller)}");
 }
 .menuBottomBtn-discotroll{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/discotroll.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/discotroll.png?"+cacheKiller)}");
 }
 .moreGamesBtn{
     width: 172px;
@@ -437,16 +184,16 @@ http_response_code(200);
     cursor: pointer;
     background-size: cover;
     background-position: center;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/moregames.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/moregames.png?"+cacheKiller)}");
 }
 .backBtn-blue{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/blue_back.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/blue_back.png?"+cacheKiller)}");
 }
 .backBtn-green{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/green_back.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/green_back.png?"+cacheKiller)}");
 }
 .backBtn-pink{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/pink_back.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/pink_back.png?"+cacheKiller)}");
 }
 .mainBtn{
     width: 170px;
@@ -458,19 +205,19 @@ http_response_code(200);
     background-position: center;
 }
 .characterEditorBtn{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/characterEditor.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/characterEditor.png?"+cacheKiller)}");
 }
 .mainLevelsBtn{
     width: 230px;
     height: 230px;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/mainLevels.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/mainLevels.png?"+cacheKiller)}");
 }
 .onlineLevelsBtn{
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/onlineLevels.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/buttons/onlineLevels.png?"+cacheKiller)}");
 }
 .table-top{
     background: transparent;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/table_top.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/table_top.png?"+cacheKiller)}");
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -482,7 +229,7 @@ http_response_code(200);
 }
 .table-side{
     background: transparent;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/table_side.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/table_side.png?"+cacheKiller)}");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -494,7 +241,7 @@ http_response_code(200);
 }
 .table-bottom{
     background: transparent;
-    background-image: url("${await preloadAssetSyncToGameLoad("./images/table_bottom.png?" + cacheKiller)}");
+    background-image: url("${await preloadAssetSyncToGameLoad("./images/table_bottom.png?"+cacheKiller)}");
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -516,100 +263,10 @@ http_response_code(200);
     display: flex;
     justify-content: center;
     align-items: center;
-}`;
-            document.head.appendChild(style);
-        }
-
-        function openPage(page, closeAllOtherPages = true) {
-            if(page === "plugins") {
-                if(closeAllOtherPages) goToMenu();
-                modifyURL("/plugins");
-                document.querySelector(".page.plugins").classList.add("introFadeIn");
-                document.querySelector(".page.plugins").classList.remove("introFadeOut");
-            } else if(page === "mainLevels") {
-                if(closeAllOtherPages) goToMenu();
-                modifyURL("/mainLevels");
-                document.querySelector(".page.mainLevels").classList.add("introFadeIn");
-                document.querySelector(".page.mainLevels").classList.remove("introFadeOut");
-            } else if(page === "moreGames") {
-                if(closeAllOtherPages) goToMenu();
-                modifyURL("/moreGames");
-                document.querySelector(".page.moreGames").classList.add("introFadeIn");
-                document.querySelector(".page.moreGames").classList.remove("introFadeOut");
-            } else if(page === "robloxSocialLinks") {
-                let oldURL = getURL();
-                if(closeAllOtherPages) goToMenu();
-                modifyURL(oldURL);
-                document.querySelector(".page.robloxSocialLinks").classList.add("introFadeIn");
-                document.querySelector(".page.robloxSocialLinks").classList.remove("introFadeOut");
-            } else if(page === "discoTroll") {
-                let oldURL = getURL();
-                if(closeAllOtherPages) goToMenu();
-                modifyURL(oldURL);
-                document.querySelector(".page.discoTroll").classList.add("introFadeIn");
-                document.querySelector(".page.discoTroll").classList.remove("introFadeOut");
-            } else if(page === "http404") {
-                let oldURL = getURL();
-                if(closeAllOtherPages) goToMenu();
-                modifyURL(oldURL);
-                document.querySelector(".page.http404").classList.add("introFadeIn");
-                document.querySelector(".page.http404").classList.remove("introFadeOut");
-            } else {
-                openPage("http404", closeAllOtherPages);
-            }
-        }
-
-        function goToMenu() {
-            modifyURL("/");
-            document.querySelectorAll(".page").forEach((page) => {page.classList.remove("introFadeIn");page.classList.add("introFadeOut");});
-        }
-
-        document.querySelectorAll(".page").forEach((page) => {page.classList.remove("introFadeIn");page.classList.add("introFadeOut");});
-
-        if(getURL() === "/") console.log("No page requested.");
-        else if(getURL() === "/mainLevels") openPage("mainLevels");
-        else if(getURL() === "/plugins") openPage("plugins");
-        else if(getURL() === "/moreGames") openPage("moreGames");
-        else openPage("http404");
-
-        let discoTrolled = false;
-
-        async function discoTroll() {
-            if(!discoTrolled) {
-                discoTrolled = true;
-
-                openPage("discoTroll");
-                setTimeout(async () => {
-                    setInterval(() => {
-                        modifyURL("/Trolled! " + Math.random());
-                        document.querySelector("title").innerText = "Trolled! " + Math.random() + " - GTest";
-                    }, 100);
-        
-                    audio.pause();
-                    audio = new Audio(await preloadAssetSync("./sounds/darudesandstorm.mp3?" + cacheKiller));
-                    audio.loop = true;
-                    audio.play();
-        
-                    const style = document.createElement("style");
-                    style.innerHTML = `*{
+}`;document.head.appendChild(e)}function openPage(e,a=true){if(e==="plugins"){if(a)goToMenu();modifyURL("/plugins");document.querySelector(".page.plugins").classList.add("introFadeIn");document.querySelector(".page.plugins").classList.remove("introFadeOut")}else if(e==="mainLevels"){if(a)goToMenu();modifyURL("/mainLevels");document.querySelector(".page.mainLevels").classList.add("introFadeIn");document.querySelector(".page.mainLevels").classList.remove("introFadeOut")}else if(e==="moreGames"){if(a)goToMenu();modifyURL("/moreGames");document.querySelector(".page.moreGames").classList.add("introFadeIn");document.querySelector(".page.moreGames").classList.remove("introFadeOut")}else if(e==="robloxSocialLinks"){let e=getURL();if(a)goToMenu();modifyURL(e);document.querySelector(".page.robloxSocialLinks").classList.add("introFadeIn");document.querySelector(".page.robloxSocialLinks").classList.remove("introFadeOut")}else if(e==="discoTroll"){let e=getURL();if(a)goToMenu();modifyURL(e);document.querySelector(".page.discoTroll").classList.add("introFadeIn");document.querySelector(".page.discoTroll").classList.remove("introFadeOut")}else if(e==="http404"){let e=getURL();if(a)goToMenu();modifyURL(e);document.querySelector(".page.http404").classList.add("introFadeIn");document.querySelector(".page.http404").classList.remove("introFadeOut")}else{openPage("http404",a)}}function goToMenu(){modifyURL("/");document.querySelectorAll(".page").forEach(e=>{e.classList.remove("introFadeIn");e.classList.add("introFadeOut")})}document.querySelectorAll(".page").forEach(e=>{e.classList.remove("introFadeIn");e.classList.add("introFadeOut")});if(getURL()==="/")console.log("No page requested.");else if(getURL()==="/mainLevels")openPage("mainLevels");else if(getURL()==="/plugins")openPage("plugins");else if(getURL()==="/moreGames")openPage("moreGames");else openPage("http404");let discoTrolled=false;async function discoTroll(){if(!discoTrolled){discoTrolled=true;openPage("discoTroll");setTimeout(async()=>{setInterval(()=>{modifyURL("/Trolled! "+Math.random());document.querySelector("title").innerText="Trolled! "+Math.random()+" - GTest"},100);audio.pause();audio=new Audio(await preloadAssetSync("./sounds/darudesandstorm.mp3?"+cacheKiller));audio.loop=true;audio.play();const e=document.createElement("style");e.innerHTML=`*{
             animation: bounceButton 0.1s infinite ease-in-out forwards;
-        }`;
-                    document.body.appendChild(style);
-                }, 5000);
-            }
-        }
-    </script>
-    <script type="module">
-    await loadCSS();
-    document.querySelector(".background").src = await preloadAssetSyncToGameLoad("./videos/menubg.mp4?" + cacheKiller);
-    document.querySelector("#logo img").src = await preloadAssetSyncToGameLoad("./images/logo.png?" + cacheKiller);
-    document.querySelector(".nolanwhyIntro").src = await preloadAssetSyncToGameLoad("./videos/nolanwhyIntroNew.mp4?" + cacheKiller);
-    await preloadAssetSyncToGameLoad("./sounds/menu.mp3?" + cacheKiller);
-    await preloadAssetSyncToGameLoad("./sounds/menuLoop.mp3?" + cacheKiller);
-    await preloadAssetSyncToGameLoad("./sounds/menuLoopMegalovania.mp3?" + cacheKiller);
-    await preloadAssetSyncToGameLoad("./sounds/DJRubRub.mp3?" + cacheKiller);
-    await preloadAssetSyncToGameLoad("./sounds/darudesandstorm.mp3?" + cacheKiller);
-    loadGame();
-    </script>
+        }`;document.body.appendChild(e)},5e3)}}</script>
+    <script type="module">await loadCSS();document.querySelector(".background").src=await preloadAssetSyncToGameLoad("./videos/menubg.mp4?"+cacheKiller);document.querySelector("#logo img").src=await preloadAssetSyncToGameLoad("./images/logo.png?"+cacheKiller);document.querySelector(".nolanwhyIntro").src=await preloadAssetSyncToGameLoad("./videos/SigmacellIntroNew.mp4?"+cacheKiller);await preloadAssetSyncToGameLoad("./sounds/menu.mp3?"+cacheKiller);await preloadAssetSyncToGameLoad("./sounds/menuLoopMegalovania.mp3?"+cacheKiller);await preloadAssetSyncToGameLoad("./sounds/darudesandstorm.mp3?"+cacheKiller);loadGame();</script>
 </body>
 </html>
+<?php echo ob_get_clean(); ?>
